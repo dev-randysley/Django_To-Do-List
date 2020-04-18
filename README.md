@@ -1,9 +1,9 @@
-#Desarrollo de Algoritmos con Python
+### Desarrollo con Python
 
-#### Algoritmo de Busqueda Binaria
+- Algoritmo de Busqueda Binaria
 
-#### Juego del Ahorcado
+- Juego del Ahorcado
 
-#### Calculadora con Tkinter
+- Calculadora con Tkinter
 
-###Desarrollo de un CRUD con Python
+- Manejo de CRUD con Python
