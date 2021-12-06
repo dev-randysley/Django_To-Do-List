@@ -1,0 +1,25 @@
+{% extends "tasks/layout.html" %}
+
+{%block title%} 
+<title>Tasks</title>
+{% endblock %}
+
+{% block body %}
+    <h1>List of tasks</h1>
+    <ul>
+        {% for task in tasks %}
+
+            <li>{{ task }}</li>
+        {% empty %}
+            <li> No tasks.</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'tasks:add' %}"> Add a tasks</a>
+    <br>
+    <br>
+    <form action="{% url 'tasks:index' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="remove tasks">
+    </form>
+{% endblock %}
