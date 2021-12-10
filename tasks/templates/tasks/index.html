@@ -5,18 +5,24 @@
 {% endblock %}
 
 {% block body %}
-    <h1>List of tasks</h1>
+    <h1>To-Do List</h1>
     <ul>
         {% for task in tasks %}
-
-            <li>{{ task }}</li>
+            <label><input type="checkbox"> {{task}} <a href="#">Edit</a></label><br>
         {% empty %}
             <li> No tasks.</li>
         {% endfor %}
     </ul>
     <br>
-    <a href="{% url 'tasks:add' %}"> Add a tasks</a>
-    <br>
+    <!-- <a href="{% url 'tasks:add' %}"> Add a tasks</a> -->
+    <!-- <br>
+    <br> -->
+    <form action="{% url 'tasks:add' %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" placeholder="New Task" value="Add">
+    </form>
+    <!-- remove tasks form -->
     <br>
     <form action="{% url 'tasks:index' %}" method="post">
         {% csrf_token %}

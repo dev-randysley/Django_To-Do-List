@@ -6,7 +6,9 @@ from django.urls import reverse
 
 class NewTaskForm(forms.Form):
     
-    task = forms.CharField(label=" New taks")
+    task = forms.CharField(label="",widget= forms.TextInput
+                           (attrs={'placeholder':'New Task'})
+                           )
     
 def index(request):
     if "tasks" not in request.session:
@@ -34,4 +36,3 @@ def add(request):
     return render(request, "tasks/add.html",{
         "form":NewTaskForm()
     })
-
