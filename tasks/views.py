@@ -1,5 +1,5 @@
 from django import forms
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Task
@@ -43,17 +43,20 @@ def edit(request, task_id):
             if "save" in request.POST:
                 task = form.cleaned_data["task"]
                 update_task(task,task_id)
-                HttpResponseRedirect(reverse("tasks:index"))
-            else:
-                return render(request, "tasks/index.html",{
-                    "tasks": Task.objects.all(),
-                    "form": NewTaskForm()
-                })
+                return redirect(reverse("tasks:index"))
+        if "delete" in request.POST:
+            delete_task(task_id)
+            return redirect(reverse("tasks:index"))
+        else:
+            return redirect(reverse("tasks:index"))
     return render(request, "tasks/edit.html",{
         "task": task,
         "form":NewTaskForm()
     })
 
+def delete_task(task_id):
+    task = Task.objects.get(pk = task_id)
+    task.delete()
 
 def update_task(task,task_id):
     current = Task.objects.get(pk = task_id)
@@ -61,8 +64,6 @@ def update_task(task,task_id):
     current.save()
 
 def insert_task(task):
-    # creamos un objeto Task y usamos el metodo save para almacenar
-    # en la BD
     t = Task(task = task)
     t.save()
 
