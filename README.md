@@ -1,13 +1,3 @@
-### Desarrollo con Python
-
-- Algoritmo de Busqueda Binaria
-
-- Juego del Ahorcado
-
-- Calculadora con Tkinter
-
-- Manejo de CRUD con Python
-
 ## To-Do List with Django
 
 ![inicio_tasks](https://user-images.githubusercontent.com/63586427/144775761-76ea12fc-89b2-4a68-aa9f-f5da9eaa8c84.png)
