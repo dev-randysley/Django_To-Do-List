@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .models import Task
 # Create your views here.
 
 class NewTaskForm(forms.Form):
@@ -11,13 +12,8 @@ class NewTaskForm(forms.Form):
                            )
     
 def index(request):
-    if "tasks" not in request.session:
-        request.session["tasks"] = []
-    if request.method == "POST":
-        request.session["tasks"] = []
-        return HttpResponseRedirect(reverse("tasks:index"))
     return render(request,"tasks/index.html",{
-        "tasks": request.session["tasks"],
+        "tasks": Task.objects.all(),
         "form": NewTaskForm()
     })
 
@@ -25,8 +21,8 @@ def add(request):
     if request.method == "POST":
         form = NewTaskForm(request.POST)
         if form.is_valid():
-            task = form.cleaned_data["task"]
-            request.session["tasks"] += [task]
+            new_task = form.cleaned_data["task"]
+            insert_task(new_task)
             return HttpResponseRedirect(reverse("tasks:index"))
         else:
             return render(request,"tasks/add.html",{
@@ -36,3 +32,9 @@ def add(request):
     return render(request, "tasks/add.html",{
         "form":NewTaskForm()
     })
+
+def insert_task(task):
+    # creamos un objeto Task y usamos el metodo save para almacenar
+    # en la BD
+    t = Task(task = task)
+    t.save()

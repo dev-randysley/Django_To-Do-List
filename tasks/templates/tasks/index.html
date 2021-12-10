@@ -24,8 +24,4 @@
     </form>
     <!-- remove tasks form -->
     <br>
-    <form action="{% url 'tasks:index' %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="remove tasks">
-    </form>
 {% endblock %}
