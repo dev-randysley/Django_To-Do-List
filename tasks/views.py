@@ -10,7 +10,8 @@ class NewTaskForm(forms.Form):
     task = forms.CharField(label="",widget= forms.TextInput
                            (attrs={'placeholder':'New Task'})
                            )
-    
+
+
 def index(request):
     return render(request,"tasks/index.html",{
         "tasks": Task.objects.all(),
@@ -37,11 +38,27 @@ def add(request):
 def edit(request, task_id):
     task = Task.objects.get(pk = task_id)
     if request.method == "POST":
-        pass
+        form = NewTaskForm(request.POST)
+        if form.is_valid():
+            if "save" in request.POST:
+                task = form.cleaned_data["task"]
+                update_task(task,task_id)
+                HttpResponseRedirect(reverse("tasks:index"))
+            else:
+                return render(request, "tasks/index.html",{
+                    "tasks": Task.objects.all(),
+                    "form": NewTaskForm()
+                })
     return render(request, "tasks/edit.html",{
         "task": task,
-        "form":NewTaskForm
+        "form":NewTaskForm()
     })
+
+
+def update_task(task,task_id):
+    current = Task.objects.get(pk = task_id)
+    current.task = task
+    current.save()
 
 def insert_task(task):
     # creamos un objeto Task y usamos el metodo save para almacenar
