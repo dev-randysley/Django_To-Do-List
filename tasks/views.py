@@ -25,7 +25,7 @@ def add(request):
             insert_task(new_task)
             return HttpResponseRedirect(reverse("tasks:index"))
         else:
-            return render(request,"tasks/add.html",{
+            return render(request,"tasks/index.html",{
                 "form": form
             })
     
@@ -33,8 +33,19 @@ def add(request):
         "form":NewTaskForm()
     })
 
+
+def edit(request, task_id):
+    task = Task.objects.get(pk = task_id)
+    if request.method == "POST":
+        pass
+    return render(request, "tasks/edit.html",{
+        "task": task,
+        "form":NewTaskForm
+    })
+
 def insert_task(task):
     # creamos un objeto Task y usamos el metodo save para almacenar
     # en la BD
     t = Task(task = task)
     t.save()
+

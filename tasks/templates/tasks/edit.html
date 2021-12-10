@@ -1,0 +1,16 @@
+{% extends "tasks/layout.html" %}
+
+{% block title%} 
+<title>Edit Task</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Edit Task "{{task}}"</h1>
+    <form action="{% url 'tasks:edit' task.id %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Save" name = "save">
+        <input type="submit" value="Cancel" name = "cancel">
+    </form>
+    
+{% endblock %}
