@@ -10,8 +10,7 @@ class NewTaskForm(forms.Form):
     task = forms.CharField(label="",widget= forms.TextInput
                            (attrs={'placeholder':'New Task'})
                            )
-
-
+                           
 def index(request):
     return render(request,"tasks/index.html",{
         "tasks": Task.objects.all(),
