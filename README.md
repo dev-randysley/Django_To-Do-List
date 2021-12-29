@@ -8,4 +8,5 @@
 ![otro tasks](https://user-images.githubusercontent.com/63586427/144775865-d916a63d-29fa-4f2c-8e52-2ab22cff13a7.png)
 ![tasks](https://user-images.githubusercontent.com/63586427/144775854-4f94697f-fdb9-4a01-9700-da8195567c61.png)
 
+Se utiliza BD Sqlite y gestion con el ORM de Django.Se utilizo el admin de Django para verificacion de tareas cargadas en la BD.
 
